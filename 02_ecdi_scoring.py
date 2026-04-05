@@ -76,10 +76,11 @@ df["ecdi_socioemotional"] = np.where(
 
 domains = ["ecdi_literacy","ecdi_physical","ecdi_learning","ecdi_socioemotional"]
 
-# Count domains on track (only where all 4 domains are non-null)
-df["domains_on_track"] = df[domains].sum(axis=1)
+# Count domains on track — skipna=False ensures NaN propagates correctly
+# so domains_on_track is NaN whenever any domain is missing
+df["domains_on_track"] = df[domains].sum(axis=1, skipna=False)
 df["ecdi_composite"] = np.where(
-    df[domains].isnull().any(axis=1), np.nan,
+    df["domains_on_track"].isnull(), np.nan,
     (df["domains_on_track"] >= 3).astype(float)
 )
 

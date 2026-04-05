@@ -104,7 +104,7 @@ base_features = [
     "stim_mother",     # # of 6 stimulation activities done by mother
     "stim_father",     # # of 6 stimulation activities done by father
     "stim_other",      # # done by other adult
-    "stim_none",       # # activities done by no one (deprivation count)
+    # stim_none excluded: perfectly collinear with stim_mother+stim_father+stim_other
     "ece_attending",   # currently attending ECE programme
 ]
 optional = ["has_books", "has_toys", "mother_higher_ed", "UCD5"]
@@ -159,9 +159,15 @@ hgb = HistGradientBoostingClassifier(
     class_weight="balanced",
 )
 
-hgb_auc = cross_val_score(hgb, X_imp, y, cv=cv, scoring="roc_auc")
-hgb_f1  = cross_val_score(hgb, X_imp, y, cv=cv, scoring="f1")
-hgb_oof = cross_val_predict(hgb, X_imp, y, cv=cv, method="predict_proba")[:, 1]
+# Wrap HGB in a pipeline so imputation is done inside each CV fold (no leakage)
+hgb_pipe = Pipeline([
+    ("impute", SimpleImputer(strategy="median")),
+    ("model",  hgb),
+])
+
+hgb_auc = cross_val_score(hgb_pipe, X, y, cv=cv, scoring="roc_auc")
+hgb_f1  = cross_val_score(hgb_pipe, X, y, cv=cv, scoring="f1")
+hgb_oof = cross_val_predict(hgb_pipe, X, y, cv=cv, method="predict_proba")[:, 1]
 
 print(f"\nHistGradientBoosting (5-fold CV)")
 print(f"  AUC: {hgb_auc.mean():.3f} ± {hgb_auc.std():.3f}")
@@ -236,7 +242,6 @@ feature_labels = {
     "stim_mother":     "Mother stimulation (# of 6 activities)",
     "stim_father":     "Father stimulation (# of 6 activities)",
     "stim_other":      "Other adult stimulation",
-    "stim_none":       "Activities done by no one (deprivation)",
     "ece_attending":   "Currently attending ECE",
     "has_books":       "Has children's books",
     "has_toys":        "Has toys",

@@ -91,9 +91,9 @@ def name_cluster(row):
         return "High overall"
     elif len(low) >= 2:
         return "Low overall"
-    elif row[0] < 40:
+    elif row.iloc[0] < 40:
         return "Literacy-delayed"
-    elif row[2] < 40:
+    elif row.iloc[2] < 40:
         return "Learning-delayed"
     else:
         return f"Profile {int(row.name) + 1}"
@@ -109,7 +109,7 @@ width = 0.8 / K
 colors = sns.color_palette("Set2", K)
 
 for i, (cidx, row) in enumerate(cluster_means.iterrows()):
-    vals = row[domains].values * 100 if row[domains].values.max() <= 1 else row[domains].values
+    vals = row[domains].values  # already in 0-100 range (multiplied in cluster_means)
     n = (df_c["cluster"] == cidx).sum()
     label_name = row["label"]
     ax.bar(x + i*width, vals, width,
