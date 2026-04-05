@@ -1,0 +1,22 @@
+feature,mean_abs_shap
+Currently attending ECE,0.07862118061919984
+Child age (months),0.07271194101440921
+Height-for-age z-score,0.0707955226170355
+Has children's books,0.062431229819505316
+Weight-for-age z-score,0.05126967205619299
+Wealth quintile,0.030688768801103418
+Province: Koshi (vs Bagmati),0.023822861167978666
+Mother: higher education,0.020864128996558384
+Sex (female=1),0.018602335955304024
+Province: Sudurpashchim (vs Bagmati),0.01206754576368594
+Province: Karnali (vs Bagmati),0.009401739411100722
+Province: Madhesh (vs Bagmati),0.00932643563217389
+Urban area,0.008996289089568357
+Belief: child needs physical punishment,0.00595266375197687
+Province: Gandaki (vs Bagmati),0.005770961324310763
+Province: Lumbini (vs Bagmati),0.005223763151582122
+Has toys,0.0028125314829881513
+Other adult stimulation,0.0
+Mother stimulation (# of 6 activities),0.0
+Father stimulation (# of 6 activities),0.0
+Activities done by no one (deprivation),0.0
