@@ -1,10 +1,10 @@
-# Nepal MICS6 — ECDI2030 Modelling Project
-## Comprehensive Documentation
+# MICS6 — ECDI2030 Modelling 
+##  Documentation
 
 **Project:** Modelling Early Childhood Development using the UNICEF ECDI2030 Framework  
 **Data:** Nepal Multiple Indicator Cluster Survey Round 6 (MICS6), 2019–2021  
 **Author:** Prachi  
-**Date:** April 2026  
+**Date:** March 2026  
 
 ---
 
@@ -347,7 +347,7 @@ with the file path to generate the map.
 6. **HGB underperforms LR** — with small positive class (n=352) and tabular survey
    data, gradient boosting may overfit. Regularisation tuning recommended.
 
-### 9.3 Suggested Next Steps
+### 9.3 Next Steps
 
 - [ ] Multiple imputation (mice) instead of single median imputation
 - [ ] Download GADM shapefile for Nepal choropleth maps
@@ -379,4 +379,4 @@ python3 06_geospatial.py      # ~15 seconds
 
 ---
 
-*Documentation generated April 2026*
+
